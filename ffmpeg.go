@@ -22,6 +22,7 @@ func modifyAudioBitrate(args []string, bitrate string) {
 	for i, arg := range args {
 		if strings.HasPrefix(arg, "-ab:a:") {
 			args[i+1] = bitrate
+			return
 		}
 	}
 }
