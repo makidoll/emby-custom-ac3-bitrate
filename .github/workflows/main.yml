@@ -1,8 +1,8 @@
 name: main
 on:
     push:
-        branches:
-            - main
+        paths:
+            - ffmpeg.go
 jobs:
     build:
         runs-on: ubuntu-latest
