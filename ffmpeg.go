@@ -46,8 +46,6 @@ func main() {
 		modifyAudioBitrate(args, getEnv("EMBY_CUSTOM_AC3_BITRATE", "640000"))
 	}
 
-	fmt.Println(args)
-
 	command := &exec.Cmd{
 		Path:   getEnv("EMBY_CUSTOM_FFMPEG_PATH", "/bin/_ffmpeg"),
 		Args:   args,
