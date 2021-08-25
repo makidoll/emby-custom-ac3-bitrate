@@ -20,7 +20,7 @@ jobs:
               uses: actions/setup-go@v2
 
             - name: Run build
-              run: >
+              run: |
                   mkdir build
                   GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -ldflags="-s -w" ../ffmpeg.go
 
