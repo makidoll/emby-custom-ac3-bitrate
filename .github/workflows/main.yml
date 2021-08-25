@@ -20,10 +20,11 @@ jobs:
               uses: actions/setup-go@v2
 
             - name: Run build
-              run: GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -ldflags="-s -w" .
+              run: >
+                  mkdir build
+                  GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -ldflags="-s -w" ../ffmpeg.go
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v2
               with:
-                  name: ffmpeg-${{ matrix.os }}-${{ matrix.arch }}
-                  path: ffmpeg(exe)?
+                  path: build/*
