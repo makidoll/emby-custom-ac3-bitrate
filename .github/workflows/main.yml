@@ -8,8 +8,11 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                os: ["linux", "windows", "darwin"]
+                os: ["linux", "windows"]
                 arch: ["amd64", "arm64"]
+                exclude:
+                    - os: "windows"
+                      arch: arm64
         steps:
             - uses: actions/checkout@v2
 
@@ -17,10 +20,10 @@ jobs:
               uses: actions/setup-go@v2
 
             - name: Run build
-              run: GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build .
+              run: GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -ldflags="-s -w" .
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v2
               with:
                   name: ffmpeg-${{ matrix.os }}-${{ matrix.arch }}
-                  path: ffmpeg*
+                  path: ffmpeg(exe)?
