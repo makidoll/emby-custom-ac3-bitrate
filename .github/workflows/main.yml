@@ -1,0 +1,26 @@
+name: main
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                os: ["linux", "windows", "darwin"]
+                arch: ["amd64", "arm64"]
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Setup Go
+              uses: actions/setup-go@v2
+
+            - name: Run build
+              run: GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} build .
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: ffmpeg-${{ matrix.os }}-${{ matrix.arch }}
+                  path: ffmpeg*
