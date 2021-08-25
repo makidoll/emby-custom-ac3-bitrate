@@ -22,6 +22,7 @@ jobs:
             - name: Run build
               run: |
                   mkdir build
+                  cd build
                   GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -ldflags="-s -w" ../ffmpeg.go
 
             - name: Upload Artifact
